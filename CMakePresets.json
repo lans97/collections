@@ -1,0 +1,87 @@
+{
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 23,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "dev",
+            "displayName": "Development Config",
+            "description": "Development Build (Ninja)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/dev",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "DEBUG",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release Config",
+            "description": "Release Build (Ninja)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/dev",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RELEASE"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "dev",
+            "configurePreset": "dev"
+        },
+        {
+            "name": "release",
+            "configurePreset": "release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "dev",
+            "configurePreset": "dev"
+        },
+        {
+            "name": "release",
+            "configurePreset": "release"
+        }
+    ],
+    "workflowPresets": [
+        {
+            "name": "dev",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "dev"
+                },
+                {
+                    "type": "build",
+                    "name": "dev"
+                },
+                {
+                    "type": "test",
+                    "name": "dev"
+                }
+            ]
+        },
+        {
+            "name": "release",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "release"
+                },
+                {
+                    "type": "build",
+                    "name": "release"
+                },
+                {
+                    "type": "test",
+                    "name": "release"
+                }
+            ]
+        }
+    ]
+}
